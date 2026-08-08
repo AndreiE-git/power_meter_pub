@@ -55,7 +55,7 @@ See the [Results](#-results) section for the measured results.
     - [POWER\_EN and Power Grid Outage Monitoring](#power_en-and-power-grid-outage-monitoring)
     - [RMS Measurement](#rms-measurement)
   - [Windows Application](#windows-application)
-- [🥳 Results](#-results)
+- [📊 Results](#-results)
 - [🌟 Future work](#-future-work)
 - [🏁 Conclusions](#-conclusions)
 - [🔎 Resources](#-resources)
@@ -191,7 +191,7 @@ This is particularly useful for the data acquisition system, where frequent tran
 
 **FIGURE 1: DMA data transfer types**
 
-<img src="docs/components/dsPIC33CK256MP205/dsPIC33CK256MP205_DMA_data_transfer_types.png" width="65%" height="auto">
+<img src="docs/components/dsPIC33CK256MP205/dsPIC33CK256MP205_DMA_data_transfer_types.png" width="85%" height="auto">
 
 DMA transfers can be performed between RAM and peripherals, RAM and RAM, or peripherals and peripherals.
 The module provides **86 configurable triggers**, including UART reception and change notification interrupts, and supports both **8-bit and 16-bit transfers**.
@@ -290,7 +290,7 @@ The overall system architecture is shown in the figure below.
 
 **FIGURE 3: Device architecture**
 
-<img src="docs/hardware_implementation/device_architecture/device_architecture.png" width="55%" height="auto">
+<img src="docs/hardware_implementation/device_architecture/device_architecture.png" width="65%" height="auto">
 
 
 Some components are selectively enabled or disabled depending on the grid status to **reduce power consumption during battery-backed operation**.
@@ -304,7 +304,7 @@ Some components are selectively enabled or disabled depending on the grid status
 
 **FIGURE 4: P1 functional block**
 
-<img src="docs/hardware_implementation/board_1_rectifier/P1_functional_block.jpeg" width="55%" height="auto">
+<img src="docs/hardware_implementation/board_1_rectifier/P1_functional_block.jpeg" width="60%" height="auto">
 
 Board P1 converts the **230 VAC** grid voltage to **DC power** to supply the rest of the device. The power transformer is located on this board.
 
@@ -314,7 +314,7 @@ Board P1 converts the **230 VAC** grid voltage to **DC power** to supply the res
 
 **FIGURE 5: P2 functional block**
 
-<img src="docs/hardware_implementation/board_2_battery_charger/P2_functional_block.jpeg" width="55%" height="auto">
+<img src="docs/hardware_implementation/board_2_battery_charger/P2_functional_block.jpeg" width="65%" height="auto">
 
 Board P2 manages the **power supply for boards P3 and P4** and controls the battery charging process.
 When grid power is available, the board supplies the system and charges the lead-acid battery.
@@ -334,7 +334,7 @@ The **POWER_EN** signal indicates the active power source:
 
 **FIGURE 6: P3 functional block**
 
-<img src="docs/hardware_implementation/board_3_main_board/P3_functional_block.jpeg" width="35%" height="auto">
+<img src="docs/hardware_implementation/board_3_main_board/P3_functional_block.jpeg" width="45%" height="auto">
 
 Board P3 handles **data acquisition**, manages communication with the Windows application, and facilitates communication between the device's components.
 
@@ -346,7 +346,7 @@ Two switches and an LDO were included to simplify development and testing, allow
 
 **FIGURE 7: P4 functional block**
 
-<img src="docs/hardware_implementation/board_4_dspic_module/P4_functional_block.jpg" width="35%" height="auto">
+<img src="docs/hardware_implementation/board_4_dspic_module/P4_functional_block.jpg" width="45%" height="auto">
 
 Board P4 contains the **dsPIC33CK256MP205** and **DS3231 RTC**.
 Its main functions are to **process the data acquired by P3 and manage communication between the device components**.
@@ -359,11 +359,11 @@ The device components are housed in a **custom 3D-printed enclosure** designed t
 
 **FIGURE 8: Device components**
 
-<img src="docs/introduction/final_device_opened.png" width="50%" height="auto">
+<img src="docs/introduction/final_device_opened.png" width="90%" height="auto">
 
 **FIGURE 9: Device in operation**
 
-<img src="docs/introduction/final_device_functioning.png" width="33%" height="auto">
+<img src="docs/introduction/final_device_functioning.png" width="45%" height="auto">
 
 Figure 9 shows the device powered from a wall outlet with a **hot-air soldering station** connected through the extension cord.
 The station's energy consumption is continuously measured, and the results are displayed in the **Windows application**.
@@ -482,7 +482,7 @@ Communication is handled through the **MI2C2IF interrupt**, where control signal
 
 **FIGURE 12: DS3231 register list**
 
-<img src="docs/software_implementation/Microcontroller/I2C_and_DS3231/DS3231_register_list.jpeg" width="70%" height="auto">
+<img src="docs/software_implementation/Microcontroller/I2C_and_DS3231/DS3231_register_list.jpeg" width="75%" height="auto">
 
 The DS3231 register map is shown in **Figure 12**.
 The device provides **13 configuration and status registers** and includes a calendar with leap-year correction, although the calendar functionality is not currently used.
@@ -510,7 +510,7 @@ With an **8-bit word length**, the FIFO can store up to **16 words**.
 
 **FIGURE 13: MCP3911 register list**
 
-<img src="docs/software_implementation/Microcontroller/SPI1_and_MCP3911/MCP3911_register_list.png" width="55%" height="auto">
+<img src="docs/software_implementation/Microcontroller/SPI1_and_MCP3911/MCP3911_register_list.png" width="65%" height="auto">
 
 The MCP3911 register structure is shown in **Figure 13**.
 
@@ -526,7 +526,7 @@ This allows the ADC data registers to be read continuously without manually upda
 
 **FIGURE 14: MCP3911 clock structure**
 
-<img src="docs/software_implementation/Microcontroller/SPI1_and_MCP3911/MCP3911_clock_structure.png" width="50%" height="auto">
+<img src="docs/software_implementation/Microcontroller/SPI1_and_MCP3911/MCP3911_clock_structure.png" width="65%" height="auto">
 
 The MCP3911 clock structure is shown in **Figure 14**.
 
@@ -543,7 +543,7 @@ According to the **Nyquist criterion**, this sampling rate allows signal compone
 
 **FIGURE 15: MCP3911 data acquisition**
 
-<img src="docs/software_implementation/Microcontroller/SPI1_and_MCP3911/MCP3911_data_acquisition.png" width="95%" height="auto">
+<img src="docs/software_implementation/Microcontroller/SPI1_and_MCP3911/MCP3911_data_acquisition.png" width="100%" height="auto">
 
 An example of data transfer with the MCP3911 is shown in **Figure 15**.
 
@@ -621,7 +621,7 @@ The application is shown in **Figure 17** and **Figure 18**.
 
 **FIGURE 17: Windows application first page**
 
-<img src="docs/software_implementation/Windows_application/Windows_application_first_page.jpeg" width="55%" height="auto">
+<img src="docs/software_implementation/Windows_application/Windows_application_first_page.jpeg" width="75%" height="auto">
 
 The application is organized in two tab pages ( 1 ).
 The first tab provides the following functionality:
@@ -639,7 +639,7 @@ The available controls are enabled or disabled according to the current ESP8266 
 
 **FIGURE 18: Windows application second page**
 
-<img src="docs/software_implementation/Windows_application/Windows_application_second_page.jpeg" width="55%" height="auto">
+<img src="docs/software_implementation/Windows_application/Windows_application_second_page.jpeg" width="75%" height="auto">
 
 The second tab displays several groups of system parameters:
 
@@ -655,7 +655,7 @@ The **Grid outages** and **Parameter min and max** data can be reset using the c
 
 
 <!-- ______________________________________________________________________________________________________________________________________________________ -->
-# 🥳 Results
+# 📊 Results
 
 The device's power consumption was evaluated under two operating conditions:
 
