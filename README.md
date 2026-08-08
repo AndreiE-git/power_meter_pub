@@ -1,14 +1,15 @@
 
 <div align="center">
     <h1>Power meter project</h1>
-    <img src="docs/introduction/final_device_opened.png" width="65%" height="auto"> <img src="docs/introduction/final_device_functioning.png" width="33%" height="auto">
+    <img src="docs/introduction/final_device_opened.png" width="65%" height="auto"> <img src="docs/introduction/final_device_functioning.png" width="30.2%" height="auto">
 </div>
 
 
 <!-- ______________________________________________________________________________________________________________________________________________________ -->
-# 🚀 Overview
+# 🚀 Introduction
 
-The increasing number of devices connected to the electrical grid can introduce disturbances that affect the performance and reliability of connected equipment.
+The increasing number of electrical devices connected to the grid can introduce disturbances that affect the quality of the supplied power and the operation of connected equipment.
+**Power quality monitoring** is therefore essential for detecting issues such as voltage fluctuations and grid outages before they lead to equipment malfunction or damage.
 
 This project implements a custom **hardware and software solution for monitoring electrical power quality and energy consumption**.
 The system measures key electrical parameters, detects power quality disturbances, and monitors grid outages.
@@ -21,7 +22,7 @@ See the [Results](#-results) section for the measured results.
 <!-- ______________________________________________________________________________________________________________________________________________________ -->
 # 📒 Table of content
 
-- [🚀 Overview](#-overview)
+- [🚀 Introduction](#-introduction)
 - [📒 Table of content](#-table-of-content)
 - [📄 System Overview](#-system-overview)
   - [Monitored Parameters](#monitored-parameters)
@@ -238,7 +239,7 @@ The module operates from a **3.3 V supply**.
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ -->
 ## DS3231
 
-The duration of grid outages is measured using the [ DS3231 ]( https://www.analog.com/media/en/technical-documentation/data-sheets/DS3231.pdf ), a high-precision **real-time clock/calendar ( RTCC )**.
+The duration of grid outages is measured using the [ DS3231 ]( https://www.analog.com/media/en/technical-documentation/data-sheets/DS3231.pdf ), a high-precision **real-time clock / calendar ( RTCC )**.
 
 The integrated temperature-compensated oscillator provides an accuracy of **±2 ppm** over **0 to +40 °C** and **±3.5 ppm** over **−40 to +85 °C**.
 Dedicated registers compensate for oscillator aging and temperature variations.
@@ -279,7 +280,7 @@ The following color coding is used to distinguish between different connection t
 
 The device is divided into **four PCBs**, each responsible for a specific part of the system:
 
-* **Board P1 - Rectifier:** Converts the **230 VAC** grid voltage to **DC** ( 9 V DC at 0.833 A load ) to power the device. The power transformer is located on this board.
+* **Board P1 - Rectifier:** Converts the **230 VAC grid voltage** to **DC voltage** ( 9 V DC at 0.833 A load ) to power the device. The power transformer is located on this board.
 * **Board P2 - Battery Charger:** Manages the power source and battery charging. When grid power is available, the board powers the system and charges the battery. During a grid outage, it switches to battery power to keep the device operating. The **PIC16F18346** is located on this board.
 * **Board P3 - Data Acquisition:** Handles signal acquisition and communication with the computer. It also provides two connectors for the P4 dsPIC module. The **MCP2221A, MCP3911, and ESP8266** are located on this board, while the voltage and current transformers are connected through external cables.
 * **Board P4 - dsPIC Module:** Contains the main microcontroller responsible for processing the data acquired by P3. The **dsPIC33CK256MP205** and **DS3231** are located on this board.
@@ -305,8 +306,6 @@ Some components are selectively enabled or disabled depending on the grid status
 
 <img src="docs/hardware_implementation/board_1_rectifier/P1_functional_block.jpeg" width="55%" height="auto">
 
-The block diagram of the board is shown in **Figure 4**.
-
 Board P1 converts the **230 VAC** grid voltage to **DC power** to supply the rest of the device. The power transformer is located on this board.
 
 
@@ -316,8 +315,6 @@ Board P1 converts the **230 VAC** grid voltage to **DC power** to supply the res
 **FIGURE 5: P2 functional block**
 
 <img src="docs/hardware_implementation/board_2_battery_charger/P2_functional_block.jpeg" width="55%" height="auto">
-
-The block diagram of the board is shown in **Figure 5**.
 
 Board P2 manages the **power supply for boards P3 and P4** and controls the battery charging process.
 When grid power is available, the board supplies the system and charges the lead-acid battery.
@@ -339,8 +336,6 @@ The **POWER_EN** signal indicates the active power source:
 
 <img src="docs/hardware_implementation/board_3_main_board/P3_functional_block.jpeg" width="35%" height="auto">
 
-The block diagram of the board is shown in **Figure 6**.
-
 Board P3 handles **data acquisition**, manages communication with the Windows application, and facilitates communication between the device's components.
 
 Two switches and an LDO were included to simplify development and testing, allowing the P3 and P4 boards to be powered directly from **USB** without requiring an auxiliary power supply or the complete device assembly.
@@ -352,8 +347,6 @@ Two switches and an LDO were included to simplify development and testing, allow
 **FIGURE 7: P4 functional block**
 
 <img src="docs/hardware_implementation/board_4_dspic_module/P4_functional_block.jpg" width="35%" height="auto">
-
-The block diagram of the board is shown in **Figure 7**.
 
 Board P4 contains the **dsPIC33CK256MP205** and **DS3231 RTC**.
 Its main functions are to **process the data acquired by P3 and manage communication between the device components**.
