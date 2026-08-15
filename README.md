@@ -1,6 +1,6 @@
 
 <div align="center">
-    <h1>Power meter project</h1>
+    <h1>Power Meter</h1>
     <img src="docs/introduction/final_device_opened.png" width="65%" height="auto"> <img src="docs/introduction/final_device_functioning.png" width="30.2%" height="auto">
 </div>
 
@@ -32,12 +32,16 @@ See the [Results](#-results) section for the measured results.
 - [🛠️ Tools Used](#️-tools-used)
 - [📂 Repository structure](#-repository-structure)
 - [⚙️ Components](#️-components)
-  - [PIC16F18346](#pic16f18346)
-  - [dsPIC33CK256MP205](#dspic33ck256mp205)
-  - [MCP3911](#mcp3911)
-  - [ESP8266](#esp8266)
-  - [DS3231](#ds3231)
-  - [MCP2221A](#mcp2221a)
+  - [Microcontrollers](#microcontrollers)
+    - [dsPIC33CK256MP205](#dspic33ck256mp205)
+    - [PIC16F18346](#pic16f18346)
+  - [Data acquisition](#data-acquisition)
+    - [MCP3911](#mcp3911)
+  - [Communication](#communication)
+    - [ESP8266](#esp8266)
+    - [MCP2221A](#mcp2221a)
+  - [Real-time clock](#real-time-clock)
+    - [DS3231](#ds3231)
 - [🧰 Hardware Implementation](#-hardware-implementation)
   - [Device Architecture](#device-architecture)
   - [Board P1 — Rectifier Board](#board-p1--rectifier-board)
@@ -56,6 +60,8 @@ See the [Results](#-results) section for the measured results.
     - [RMS Measurement](#rms-measurement)
   - [Windows Application](#windows-application)
 - [📊 Results](#-results)
+  - [Power consumption optimization](#power-consumption-optimization)
+  - [Measurement results and validation](#measurement-results-and-validation)
 - [🌟 Future work](#-future-work)
 - [🏁 Conclusions](#-conclusions)
 - [🔎 Resources](#-resources)
@@ -147,30 +153,34 @@ The repository is organized as follows:
 The main components used to implement the device are listed below.
 Detailed descriptions of the key components and their role in the system are provided in the following sections.
 
+The components used to build the device are listed below.
+Detailed descriptions of the key components and their role in the system are provided in the following sections.
+
+Main components:
+
 | Component                   | Quantity | Purpose                                                              | Link                                                                                                                                                                                                                   |
 | --------------------------- | -------: | -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **PIC16F18346**             |        1 | Battery charging and power management                                | [ Datasheet ]( https://ww1.microchip.com/downloads/en/DeviceDoc/PIC16-L-F18326-18346-Data-Sheet-40001839D.pdf )                                                                                                        |
 | **dsPIC33CK256MP205**       |        1 | Data acquisition, signal processing, and system control              | [ Datasheet ]( https://ww1.microchip.com/downloads/aemDocuments/documents/MCU16/ProductDocuments/DataSheets/dsPIC33CK256MP508-Family-Data-Sheet-DS70005349.pdf )                                                       |
+| **PIC16F18346**             |        1 | Battery charging and power management                                | [ Datasheet ]( https://ww1.microchip.com/downloads/en/DeviceDoc/PIC16-L-F18326-18346-Data-Sheet-40001839D.pdf )                                                                                                        |
 | **MCP3911**                 |        1 | Synchronous dual-channel Σ-Δ ADC for voltage and current acquisition | [ Datasheet ]( https://ww1.microchip.com/downloads/aemDocuments/documents/MSLD/ProductDocuments/DataSheets/MCP3911-3.3V-Two-Channel-Analog-Front-End-DS20002286D.pdf )                                                 |
 | **ESP8266-01S**             |        1 | Wi-Fi connectivity                                                   | [ Module ]( https://ro.mouser.com/ProductDetail/SparkFun/WRL-17146?qs=DPoM0jnrROXqYUXDsg9bzA%3D%3D ) / [ Datasheet ]( https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_en.pdf ) |
 | **DS3231**                  |        1 | Real-time clock                                                      | [ Datasheet ]( https://www.analog.com/media/en/technical-documentation/data-sheets/DS3231.pdf )                                                                                                                        |
 | **MCP2221A**                |        1 | USB-to-UART bridge                                                   | [ Datasheet ]( https://ww1.microchip.com/downloads/en/devicedoc/20005565b.pdf )                                                                                                                                        |
-| **Power transformer**       |        1 | Power supply                                                         | -                                                                                                                                                                                                                      |
-| **Voltage transformer**     |        1 | Grid voltage measurement                                             | -                                                                                                                                                                                                                      |
-| **Current transformer**     |        1 | Load current measurement                                             | -                                                                                                                                                                                                                      |
-| **Lead-acid battery**       |        1 | Backup power supply                                                  | -                                                                                                                                                                                                                      |
-| **Custom 3D-printed parts** |        — | Mechanical enclosure and components                                  | -                                                                                                                                                                                                                      |
 
-<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ -->
-## PIC16F18346
+Auxiliary components:
 
-The [ PIC16F18346 ]( https://ww1.microchip.com/downloads/en/DeviceDoc/PIC16-L-F18326-18346-Data-Sheet-40001839D.pdf ) microcontroller is used to implement the **battery charging subsystem**.
-
-The **NCO, CWG, and PWM** peripherals are used to control the battery charging process, while the **EUSART** peripheral provides communication with the main data acquisition MCU. The device provides **14 KB of program memory, 1 KB of RAM, and 18 I/O pins**.
+| Component                    | Quantity | Purpose		             | Link                                                                                                       |
+| ---------------------------- | -------: | ------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| **Power transformer**        |        1 | Power supply             | -                                                                                                          |
+| **Voltage transformer**      |        1 | Grid voltage measurement | -                                                                                                          |
+| **Current transformer**      |        1 | Load current measurement | -                                                                                                          |
+| **Lead-acid battery**        |        1 | Backup power supply      | [ Product ]( https://ro.farnell.com/yuasa/y4-6/battery-lead-acid-4ah-6v/dp/2083816 )                       |
 
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ -->
-## dsPIC33CK256MP205
+## Microcontrollers
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+### dsPIC33CK256MP205
 
 The [ dsPIC33CK256MP205 ]( https://ww1.microchip.com/downloads/aemDocuments/documents/MCU16/ProductDocuments/DataSheets/dsPIC33CK256MP508-Family-Data-Sheet-DS70005349.pdf ) is used for **data acquisition, signal processing, and communication**.
 
@@ -191,7 +201,7 @@ This is particularly useful for the data acquisition system, where frequent tran
 
 **FIGURE 1: DMA data transfer types**
 
-<img src="docs/components/dsPIC33CK256MP205/dsPIC33CK256MP205_DMA_data_transfer_types.png" width="85%" height="auto">
+<img src="docs/components/dsPIC33CK256MP205/dsPIC33CK256MP205_DMA_data_transfer_types.png" width="95%" height="auto">
 
 DMA transfers can be performed between RAM and peripherals, RAM and RAM, or peripherals and peripherals.
 The module provides **86 configurable triggers**, including UART reception and change notification interrupts, and supports both **8-bit and 16-bit transfers**.
@@ -207,7 +217,17 @@ These capabilities allow the DMA to handle high-frequency data transfers efficie
 
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ -->
-## MCP3911
+### PIC16F18346
+
+The [ PIC16F18346 ]( https://ww1.microchip.com/downloads/en/DeviceDoc/PIC16-L-F18326-18346-Data-Sheet-40001839D.pdf ) microcontroller is used to implement the **battery charging subsystem**.
+
+The **NCO, CWG, and PWM** peripherals are used to control the battery charging process, while the **EUSART** peripheral provides communication with the main data acquisition MCU. The device provides **14 KB of program memory, 1 KB of RAM, and 18 I/O pins**.
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+## Data acquisition
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+### MCP3911
 
 Voltage and current measurements are performed using the [ MCP3911 ]( https://ww1.microchip.com/downloads/aemDocuments/documents/MSLD/ProductDocuments/DataSheets/MCP3911-3.3V-Two-Channel-Analog-Front-End-DS20002286D.pdf ), a dual-channel analog front-end with integrated **Σ-Δ ADCs**.
 
@@ -221,13 +241,15 @@ A synchronization signal is also used to indicate the completion of a data acqui
 
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ -->
-## ESP8266
+## Communication
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+### ESP8266
 
 **FIGURE 2: ESP8266 module**
 
 <img src="docs/components/ESP8266/ESP8266_module.png" width="20%" height="auto">
 
-An [ ESP8266-01-S ]( https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_en.pdf ) module ( **Figure 2** ) was integrated to provide **Wi-Fi connectivity**.
+An [ ESP8266-01-S ]( https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_en.pdf ) module was integrated to provide **Wi-Fi connectivity**.
 
 The module supports **SPI and UART** communication; UART is used in the current implementation.
 Configuration and control are performed using [ AT commands ]( https://room-15.github.io/blog/2015/03/26/esp8266-at-command-reference/ ).
@@ -235,9 +257,21 @@ Configuration and control are performed using [ AT commands ]( https://room-15.g
 The default UART baud rate is **115200 baud**, which can be configured according to the application requirements.
 The module operates from a **3.3 V supply**.
 
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+### MCP2221A
+
+The [ MCP2221A ]( https://ww1.microchip.com/downloads/en/devicedoc/20005565b.pdf ) USB-to-UART bridge provides the interface between the **Windows application and the dsPIC**, converting USB communication from the PC to UART communication used by the microcontroller.
+
+The MCP2221A also supports **I²C**, but UART was selected for the application due to its simplicity and higher data-transfer rate.
+
+UART is configured at **460800 baud**, with an error of **0.16%**.
+Each transmitted byte requires **10 bits**: one start bit, eight data bits, and one stop bit.
+
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ -->
-## DS3231
+## Real-time clock
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+### DS3231
 
 The duration of grid outages is measured using the [ DS3231 ]( https://www.analog.com/media/en/technical-documentation/data-sheets/DS3231.pdf ), a high-precision **real-time clock / calendar ( RTCC )**.
 
@@ -248,17 +282,6 @@ Communication with the DS3231 is performed using the **I²C interface**, support
 The device can generate a **1 Hz interrupt**, which is used to facilitate grid outage duration measurement.
 
 The device operates from a **3.3 V supply**.
-
-
-<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ -->
-## MCP2221A
-
-The [ MCP2221A ]( https://ww1.microchip.com/downloads/en/devicedoc/20005565b.pdf ) USB-to-UART bridge provides the interface between the **Windows application and the dsPIC**, converting USB communication from the PC to UART communication used by the microcontroller.
-
-The MCP2221A also supports **I²C**, but UART was selected for the application due to its simplicity and higher data-transfer rate.
-
-UART is configured at **460800 baud**, with an error of **0.16%**.
-Each transmitted byte requires **10 bits**: one start bit, eight data bits, and one stop bit.
 
 
 <!-- ______________________________________________________________________________________________________________________________________________________ -->
@@ -287,11 +310,9 @@ The device is divided into **four PCBs**, each responsible for a specific part o
 
 The overall system architecture is shown in the figure below.
 
-
 **FIGURE 3: Device architecture**
 
 <img src="docs/hardware_implementation/device_architecture/device_architecture.png" width="65%" height="auto">
-
 
 Some components are selectively enabled or disabled depending on the grid status to **reduce power consumption during battery-backed operation**.
 
@@ -656,6 +677,8 @@ The **Grid outages** and **Parameter min and max** data can be reset using the c
 
 <!-- ______________________________________________________________________________________________________________________________________________________ -->
 # 📊 Results
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+## Power consumption optimization
 
 The device's power consumption was evaluated under two operating conditions:
 
@@ -681,6 +704,9 @@ $Poff = Vbat * Ioff = 6V * 0.054A = 0.324 W$
 
 The measured results show that the device's power consumption **decreases by almost half during battery-powered operation**, mainly because the ESP8266 is disabled.
 Further power savings are planned by placing the two microcontrollers into **sleep mode** during battery operation.
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+## Measurement results and validation
 
 The differential inputs of the **MCP3911** were calibrated by shorting each input pair and measuring the resulting output.
 This determines the ADC input offset relative to zero, which is then subtracted from subsequent voltage measurements.
