@@ -16,7 +16,7 @@ The system measures key electrical parameters, detects power quality disturbance
 
 The project covers the complete development process, including **custom hardware design, embedded firmware, signal acquisition and processing, and data visualization**.
 
-See the [Results](#-results) section for the measured results.
+Photos of the completed device are available in the [Final product](#final-product) section, while measurement results can be found in the [Results](#-results) section.
 
 
 <!-- ______________________________________________________________________________________________________________________________________________________ -->
@@ -503,7 +503,7 @@ Communication is handled through the **MI2C2IF interrupt**, where control signal
 
 **FIGURE 12: DS3231 register list**
 
-<img src="docs/software_implementation/Microcontroller/I2C_and_DS3231/DS3231_register_list.jpeg" width="75%" height="auto">
+<img src="docs/software_implementation/Microcontroller/I2C_and_DS3231/DS3231_register_list.jpeg" width="85%" height="auto">
 
 The DS3231 register map is shown in **Figure 12**.
 The device provides **13 configuration and status registers** and includes a calendar with leap-year correction, although the calendar functionality is not currently used.
@@ -531,7 +531,7 @@ With an **8-bit word length**, the FIFO can store up to **16 words**.
 
 **FIGURE 13: MCP3911 register list**
 
-<img src="docs/software_implementation/Microcontroller/SPI1_and_MCP3911/MCP3911_register_list.png" width="65%" height="auto">
+<img src="docs/software_implementation/Microcontroller/SPI1_and_MCP3911/MCP3911_register_list.png" width="75%" height="auto">
 
 The MCP3911 register structure is shown in **Figure 13**.
 
@@ -589,7 +589,7 @@ The received data is then processed in the **main loop**, which clears the flag 
 
 **FIGURE 16: MCP3911 state machine**
 
-<img src="docs/software_implementation/Microcontroller/SPI1_and_MCP3911/MCP3911_state_machine.png" width="45%" height="auto">
+<img src="docs/software_implementation/Microcontroller/SPI1_and_MCP3911/MCP3911_state_machine.png" width="55%" height="auto">
 
 The MCP3911 state machine is shown in **Figure 16**.
 
