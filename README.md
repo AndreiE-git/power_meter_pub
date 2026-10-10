@@ -1,8 +1,18 @@
-
 <div align="center">
-    <h1>Power Meter</h1>
-    <img src="docs/introduction/final_device_opened.png" width="65%" height="auto"> <img src="docs/introduction/final_device_functioning.png" width="30.2%" height="auto">
+    <img src="docs/introduction/device_introduction.png" alt="Power Meter" width="100%" height="auto">
+    <p><em>A battery-backed power quality and energy monitor, built across the full stack: schematics and PCB layout, real-time signal-processing firmware, Wi-Fi connectivity, and a Windows monitoring app.</em></p>
+    <p>
+        <img src="https://img.shields.io/badge/Embedded_C-00599C?style=flat-square&logo=c&logoColor=white" alt="Embedded C">
+        <img src="https://img.shields.io/badge/dsPIC33CK-Bare--Metal_Firmware-E31E24?style=flat-square&logo=microchip&logoColor=white" alt="dsPIC33CK bare-metal firmware">
+        <img src="https://img.shields.io/badge/Architecture-Real--Time_·_Interrupt--Driven_·_Non--Blocking-2E7D32?style=flat-square" alt="Real-time, interrupt-driven, non-blocking firmware architecture">
+        <img src="https://img.shields.io/badge/Signal_Acquisition-Σ--Δ_ADC_·_Synchronous_Channels_·_DMA-6A1B9A?style=flat-square" alt="Signal acquisition: sigma-delta ADC, synchronous channels, DMA transfers">
+        <img src="https://img.shields.io/badge/ESP8266-Wi--Fi-E7352C?style=flat-square&logo=espressif&logoColor=white" alt="ESP8266 Wi-Fi">
+        <img src="https://img.shields.io/badge/C%23_.NET-WinForms_App-512BD4?style=flat-square&logo=dotnet&logoColor=white" alt="C# .NET WinForms app">
+        <img src="https://img.shields.io/badge/PCB_Design-4_Custom_Boards-A5915F?style=flat-square" alt="PCB design: four custom boards">
+        <img src="https://img.shields.io/badge/3D_Parts-Custom_Designed_%26_Printed-F7931E?style=flat-square" alt="3D parts: custom designed and printed">
+    </p>
 </div>
+
 
 
 <!-- ______________________________________________________________________________________________________________________________________________________ -->
@@ -20,10 +30,10 @@ Photos of the completed device are available in the [Final product](#final-produ
 
 
 <!-- ______________________________________________________________________________________________________________________________________________________ -->
-# 📒 Table of content
+# 📒 Table of contents
 
 - [🚀 Introduction](#-introduction)
-- [📒 Table of content](#-table-of-content)
+- [📒 Table of contents](#-table-of-contents)
 - [📄 System Overview](#-system-overview)
   - [Monitored Parameters](#monitored-parameters)
   - [System Operation](#system-operation)
