@@ -390,11 +390,11 @@ The device components are housed in a **custom 3D-printed enclosure** designed t
 
 **FIGURE 8: Device components**
 
-<img src="docs/introduction/final_device_opened.png" width="90%" height="auto">
+<img src="docs/hardware_implementation/final_product/final_device_opened.png" width="90%" height="auto">
 
 **FIGURE 9: Device in operation**
 
-<img src="docs/introduction/final_device_functioning.png" width="45%" height="auto">
+<img src="docs/hardware_implementation/final_product/final_device_functioning.png" width="45%" height="auto">
 
 Figure 9 shows the device powered from a wall outlet with a **hot-air soldering station** connected through the extension cord.
 The station's energy consumption is continuously measured, and the results are displayed in the **Windows application**.
